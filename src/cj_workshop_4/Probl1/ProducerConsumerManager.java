@@ -25,9 +25,9 @@ public class ProducerConsumerManager {
         store = new Store();
         pro = new Producer(store);
         con = new Consumer(store);
-        //  Start threads in constructor is very dangerous
+    }
+    public void openStore() throws Exception {
         pro.start();
         con.start();
     }
-    
 }

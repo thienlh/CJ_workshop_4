@@ -12,9 +12,13 @@
  */
 package cj_workshop_4;
 
-import cj_workshop_4.Probl1.*;
+import cj_workshop_4.Probl1.ProducerConsumerManager;
+import cj_workshop_4.Probl2.DinnerTable;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +29,8 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    String input;
+
     public static void main(String[] args) {
         // TODO code application logic here
         int userChoice;
@@ -46,10 +52,24 @@ public class Main {
                     System.out.println("\n---------------------------WRONG INPUT!----------------------------\n\t+ Option must be an integer number!\n");
                     userChoice = 4;
                 }
+                //  
                 switch (userChoice) {
                     case 1:
-                        ProducerConsumerManager probl1;
-                        probl1 = new ProducerConsumerManager();
+                        ProducerConsumerManager pc;
+                        pc = new ProducerConsumerManager();
+                        try {
+                            pc.openStore();
+                        } catch (Exception ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        break;
+                    case 2:
+                        DinnerTable dt = new DinnerTable();
+                        try {
+                            dt.startDinner();
+                        } catch (Exception ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         break;
                 }
             } while (userChoice > 0 && userChoice < 4);
@@ -57,9 +77,10 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             promt = sc.nextLine();
         } while (promt.substring(0, 1).equalsIgnoreCase("n"));
+        System.out.println("HAVE A NICE DAY. BYE!");
     }
+//  Clear console 
 
-    //  Clear console 
     private static void clearConsole() {
         try {
             String os = System.getProperty("os.name");
@@ -74,4 +95,5 @@ public class Main {
             System.out.println("\n\tThere are a problem with clearing console screen!\n");
         }
     }
+
 }
